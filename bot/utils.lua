@@ -141,8 +141,6 @@ end
 function vardump(value)
   print(serpent.block(value, {comment=false}))
 end
-
--- taken from http://stackoverflow.com/a/11130774/3163199
 function scandir(directory)
   local i, t, popen = 0, {}, io.popen
   for filename in popen('ls -a "'..directory..'"'):lines() do
@@ -1196,39 +1194,4 @@ function ban_by_reply_admins(extra, success, result)
 	else
 		return
 	end
-end
-
--- Unban by reply
-function unban_by_reply(extra, success, result)
-	if result.to.type == 'chat' or result.to.type == 'channel' then
-		local chat = 'chat#id'..result.to.peer_id
-		local channel = 'channel#id'..result.to.peer_id
-	if tonumber(result.from.peer_id) == tonumber(our_id) then -- Ignore bot
-		return
-	end
-		send_large_msg(chat, "User "..result.from.peer_id.." Unbanned")
-    -- Save on redis
-		local hash =  'banned:'..result.to.peer_id
-		redis:srem(hash, result.from.peer_id)
-	else
-		return
-  end
-end
-function banall_by_reply(extra, success, result)
-	if result.to.type == 'chat' or result.to.type == 'channel' then
-		local chat = 'chat#id'..result.to.peer_id
-		local channel = 'channel#id'..result.to.peer_id
-    if tonumber(result.from.peer_id) == tonumber(our_id) then -- Ignore bot
-		return
-    end
-    if is_admin2(result.from.peer_id) then -- Ignore admins
-		return
-    end
-		local name = user_print_name(result.from)
-		banall_user(result.from.peer_id)
-		chat_del_user(chat, 'user#id'..result.from.peer_id, ok_cb, false)
-		send_large_msg(chat, "User "..name.."["..result.from.peer_id.."] globally banned")
-	else
-		return
-  end
 end
