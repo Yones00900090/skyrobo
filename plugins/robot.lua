@@ -1,7 +1,7 @@
 function run(msg, matches)
 local reply = msg['id']
 local text = 'جان :)'
-local text2 = 'جونم بابایی خسته نباشی😍'
+local text2 = 'جان بابایی :)'
 if not is_sudo(msg) then
 reply_msg(reply, text, ok_cb, false)
 elseif is_sudo(msg) then
