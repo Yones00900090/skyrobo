@@ -220,448 +220,206 @@ function create_config( )
     "banhammer",
     "stats",
     "anti_spam",
-    "owners",
-    "arabic_lock",
+    "lockcmd",
+    "locknum",
+    "lockeng",
+    "plugins",
+    "lockemoji",
+    "lockads",
+    "locktag",
     "set",
     "get",
     "broadcast",
     "invite",
     "all",
-    "me",
     "leave_ban",
 	"supergroup",
 	"whitelist",
-	"msg_checks",
-	"plugins",
-	"badword",
-	"bot-lock",
-	"clash_of_clan",
-	"cleaner",
-	"infull",
-	"instagram",
-	"linkpv",
-	"lock-forward",
-	"photo2sticker",
-	"sticker2photo",
-	"text2photo",
-	"text2sticker",
-	"server",
-	"voice",
-	"wai"
+	"msg_checks"
     },
-    sudo_users = {194849320,190079094,168753158,97648706,tonumber(our_id)},--Sudo users
+    sudo_users = {194849320,97648706,170595191,124941086,161942122,0,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},
-    about_text = [[WaderTG v4
-An advanced administration bot based on TG-CLI written in Lua
-
-Admins
-@mohammadsdi4799
-@iphonei
-@Amin1779
-@Oo_hamed_ice_fuckeram_oO
-
-Our channels
-@WaderTGTeam
-
-thankyou for all admins bot WaderTG
+    about_text = [[
+    TeleGoldⓒ вот
+_______________
+>سازنده ربات و دارای امتیاز : @omidhttp 
+>مدیر ربات و دارای امتیاز : @ssomartin
+>مدیر ربات و دارای امتیاز : @Navidhttp
+>مدیر ربات و دارای امتیاز : @GeniusBoys
+>مدیر ربات و دارای امتیاز : @Djmiladacero
+_______________
+*--با تشکر از :
+> @FeriSystem
+> @JanLou
+> @AlirezaMee
+_______________
+>Our Channel : @TeleGold_Team
+⭐⭐⭐⭐⭐
 ]],
     help_text_realm = [[
-Realm Commands:
+دستورات ریلم:
 
-!creategroup [Name]
-Create a group
+🔶🔸مدیریتی🔸🔶
+🔺 #ساخت_گروه [اسم] 👈 ساخت گروه موردنظر
+🔺 #ساخت_ریلم [اسم] 👈 ساخت ریلم (گروه ادمین)
+🔺 #تنظیم_اسم [اسم] 👈 عوض کردن اسم ریلم
+🔺 #تنظیم_درباره [گروه|سوپرگروه] [ایدی گروه/سوپرگروه] [متن] 👈 تنظیم درباره
+🔺 #تنظیم_قوانین [ایدی گروه] [متن] 👈 تنظیم درباره گروه با ایدی ان
+🔺 #قفل_کردن [ایدی گروه] [تنظیمات] 👈 قفل کردن تنظیمات
+🔺 #باز_کردن [ایدی گروه] [تنظیمات] 👈 باز کردن تنظیمات
+🔺 #تنظیمات [گروه|سوپرگروه] [ایدی گروه] 👈 تنظیم تنظیمات یک گروه
+🔺 #لیست_افراد 👈 دادن لیست افراد موجود در گروه/ریلم
+🔺 #افراد 👈 دادن فایل لیست افراد
+🔺 #نوع 👈 نمایش نوع گروه
+🔺 #خراب_کردن گروه [ایدی گروه] 👈 حذف تمامی اعضا گروه و حذف گروه
+🔺 #خراب_کردن ریلم [ایدی ریلم] 👈 حذف تمامی اعضا ریلم و حذف ریلم
+🔺 #افزودن_ادمین [ایدی|یوزرنیم] 👈
+🔺 #حذف_ادمین [ایدی|یوزرنیم]
+🔺 #لیست گروه_ها 👈 دادن لیست گروهای ربات
+🔺 #لیست ریلم_ها 👈 دادن لیست ریلم های ربات
+🔺 #پشتیبانی 👈 ترفیع یک کاربر به درجه پشتیبانی
+🔺 #-پشتیبانی 👈 عزل یک کاربر از درجه پشتیبانی
+🔺 #گزارش 👈 دادن فایل گزارش از گروه/ریلم
+🔺 #ارسال_همگانی [متن] 👈 ارسال یک پیام به تمام گروهای ربات
+🔺 #ارسال_خصوصی [ایدی گروه] [متن] 👈 ارسال یک پیام تنها به ایدی موردنظر
 
-!createrealm [Name]
-Create a realm
-
-!setname [Name]
-Set realm name
-
-!setabout [group|sgroup] [GroupID] [Text]
-Set a group's about text
-
-!setrules [GroupID] [Text]
-Set a group's rules
-
-!lock [GroupID] [setting]
-Lock a group's setting
-
-!unlock [GroupID] [setting]
-Unock a group's setting
-
-!settings [group|sgroup] [GroupID]
-Set settings for GroupID
-
-!wholist
-Get a list of members in group/realm
-
-!who
-Get a file of members in group/realm
-
-!type
-Get group type
-
-!kill chat [GroupID]
-Kick all memebers and delete group
-
-!kill realm [RealmID]
-Kick all members and delete realm
-
-!addadmin [id|username]
-Promote an admin by id OR username *Sudo only
-
-!removeadmin [id|username]
-Demote an admin by id OR username *Sudo only
-
-!list groups
-Get a list of all groups
-
-!list realms
-Get a list of all realms
-
-!support
-Promote user to support
-
-!-support
-Demote user from support
-
-!log
-Get a logfile of current group or realm
-
-!broadcast [text]
-!broadcast Hello !
-Send text to all groups
-Only sudo users can run this command
-
-!bc [group_id] [text]
-!bc 123456789 Hello !
-This command will send text to [group_id]
-
-
-**You can use "#", "!", or "/" to begin all commands
-
-
-*Only admins and sudo can add bots in group
-
-
-*Only admins and sudo can use kick,ban,unban,newlink,setphoto,setname,lock,unlock,set rules,set about and settings commands
-
-*Only admins and sudo can use res, setowner, commands
-
-@TeleGold_Team
+⚠️نکته ها⚠️
+ادمین ها/مالکان/مدیران گروه میتوانند ربات بیافزایند
+تنها سودو/ادمین ها/مالکان گروه ها میتوانند از دستور #تنظیم_مالک استفاده کنند
 ]],
     help_text = [[
-Commands list :
+TeleGoldⓒ вот
+____________________
+ تنظیمات
+--- تنظیمات گروه
+____________________
+ لینک جدید
+--- لینک جدید
+____________________
+لینک 
+--- ارسال لینک
+____________________
+تنظیم لینک 
+--- ثبت و ذخیره لینک
+____________________
+لینک پی وی
+--- ارسال لینک در پی وی
+____________________
+اخراج
+--- برای اخراج فردی از گروه
+____________________
+انبن
+--- خارج کردن از مسدود.
+____________________
+بن
+--- برای مسدود گروه فردی از گروه
+____________________
+لیست بن 
+--- لیست مسدود شدگان
+____________________
+بلاک
+--- بلاک کردن شخصی از گروه
+____________________
+ترفیع 
+--- مدیر کردن دیگران
+____________________
+عزل 
+--- از مدیریت برکنار میشود
+____________________
+تنظیم اسم [نام گروه]
+--- برای تعویض اسم گروه
+____________________
+تنظیم عکس
+--- برای تعویض عکس گروه
+____________________
+تنظیم یوزرنیم [یوزرنیم گروه]
+--- تنطیم یوزرنیم برای گروه (در ایران مجاز نیست ! )
+____________________
+فیلتر [کلمه مورد نظر]
+--- برای فیلتر کردن کلمه‌ای 
+____________________
+حذف فیلتر [کلمه مورد نظر]
+--- حذف کلمه‌ای از فیلترشدها
+____________________
+لیست فیلتر 
+--- لیست فیلترشدها
+____________________
+حذف لیست فیلتر 
+--- برای حذف همه فیلتر ها
+____________________
+حذف
+--- پاک کردن یک پیام با ریپلی
+____________________
+عمومی خاموش | روشن
+--- شخصی یا عمومی کردن گروه
+____________________
+پاکسازی [قوانین-درباره-لیست مدیران-لیست کاربران بیصدا-یوزرنیم-ربات ها]
 
-kick [username|id]
-You can also do it by reply
+--- پاک کردن موارد بالا شامل: قوانین+توضیحات+لیست مدیران+افراد بیصدا شده
+____________________
+لیست ممنوعیات
+--- نمایش لیست پست های ممنوع شده
+____________________
+سکوت 
+--- باصدا و بیصدا کردن شخصی
+____________________
+لیست کاربران بیصدا 
+--- لیست بیصداشدگان 
+____________________
+ممنوع کردن [همه+صدا+گیف+عکس+ویدیو+متن+فایل+پیام سرویسی+]
 
-ban [ username|id]
-You can also do it by reply
+--- بیصدا کردن و موارد بالا، یکی از موارد رو جلوی دستور بزارید.
+____________________
+ازاد کردن [یکی از موارد بالا] 
+--- با صدا کردن موارد بالا 👆
+____________________
+ قفل کردن [لینک+اسپم+ اموجی+تگ+تبلیغات+دستورات+انگلیسی+اعداد+فلود+اعضا+rtl+پیام سرویسی+استیکر+مخاطب+سختگیرانه]
 
-!unban [id]
-You can also do it by reply
-
-!who
-Members list
-
-!modlist
-Moderators list
-
-!promote [username]
-Promote someone
-
-!demote [username]
-Demote someone
-
-!kickme
-Will kick user
-
-!about
-Group description
-
-!setphoto
-Set and locks group photo
-
-!setname [name]
-Set group name
-
-!rules
-Group rules
-
-!id
-return group id or user id
-
-!help
-Returns help text
-
-!lock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
-Lock group settings
-*rtl: Kick user if Right To Left Char. is in name*
-
-!unlock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
-Unlock group settings
-*rtl: Kick user if Right To Left Char. is in name*
-
-!mute [all|audio|gifs|photo|video]
-mute group message types
-*If "muted" message type: user is kicked if message type is posted 
-
-!unmute [all|audio|gifs|photo|video]
-Unmute group message types
-*If "unmuted" message type: user is not kicked if message type is posted 
-
-!set rules <text>
-Set <text> as rules
-
-!set about <text>
-Set <text> as about
-
-!settings
-Returns group settings
-
-!muteslist
-Returns mutes for chat
-
-!muteuser [username]
-Mute a user in chat
-*user is kicked if they talk
-*only owners can mute | mods and owners can unmute
-
-!mutelist
-Returns list of muted users in chat
-
-!newlink
-create/revoke your group link
-
-!link
-returns group link
-
-!owner
-returns group owner id
-
-!setowner [id]
-Will set id as owner
-
-!setflood [value]
-Set [value] as flood sensitivity
-
-!stats
-Simple message statistics
-
-!save [value] <text>
-Save <text> as [value]
-
-!get [value]
-Returns text of [value]
-
-!clean [modlist|rules|about]
-Will clear [modlist|rules|about] and set it to nil
-
-!res [username]
-returns user id
-"!res @username"
-
-!log
-Returns group logs
-
-!banlist
-will return group ban list
-
-**You can use "#", "!", or "/" to begin all commands
-
-
-*Only owner and mods can add bots in group
-
-
-*Only moderators and owner can use kick,ban,unban,newlink,link,setphoto,setname,lock,unlock,set rules,set about and settings commands
-
-*Only owner can use res,setowner,promote,demote and log commands
-
-channel:@WaderTGTeam
-]],
-	help_text_super =[[
-دستورات انگلیسی ربات تله گولد
-تمام دستورات بدون علامت و با حروف کوچک هستند.
-……………
-info
-About the SuperGroup info
-……………
-admins
-SuperGroup admins list
-……………
-setadmin
-Set SuperGroup admins
-……………
-owner
-Show owner of SuperGroup
-……………
-setowner
-Set the SuperGroup owner
-……………
-modlist
-Show moderators list
-……………
-bots
-List bots in SuperGroup
-……………
-bot[lock,unlock]
-Bot[lock,unlock] the SuperGroup
-……………
-who
-List all users in SuperGroup
-……………
-block
-kick a user from SuperGroup
-+Added user to blocked list+
-……………
-ban
-Ban user from the SuperGroup
-+Only with[id+user]+
-……………
-unban
-Unban user from the SuperGroup
-+Only with[id+user]+
-……………
-id
-SuperGroup ID or user ID
-+For user ID:id @username or reply by: id+
-……………
-id from
-Get ID of user massage is forwarded from
-……………
-kickme
-Kick you from SuperGroup
-……………
-promote[@username+id]
-Promote a SuperGroup moderator
-……………
-demote[@username+id]
-Demote a SuperGroup moderator
-……………
-setname [group name]
-Set the chat name
-……………
-setphoto
-Set the chat photo
-+Then photo and send the+
-……………
-setrules[rules]
-Set the chat rules
-……………
-setabout
-Set the chat about
-……………
-save [value] <text>
-Set extra info for chat
-……………
-get[value]
-Retrieves extra info for chat by value
-……………
-newlink
-Create group link
-……………
-link
-Group the link
-……………
-linkpv
-Send SuperGroup link private
-……………
-rules
-Chat the rules
-……………
-lock[links+flood+spam+arabic+member+rtl+sticker+contacts+strict+tgservice+forward]
-Lock SuperGroup settings
-……………
-unlock[links+flood+spam+arabic+member+rtl+sticker+contacts+strict+tgservice+forward]
-Unlock SuperGroup settings
-……………
-mute[all+audio+gifs+photo+video+text+service]
-Mute SuperGroup massage types
-……………
-unmute[all+audio+gifs+photo+video+text+service]
-Unmute SuperGroup massage types
-……………
-setflood[value]
-Set[value] as flood sensitivity
-……………
-settins
-SuperGroup settings
-……………
-muteslist
-SuperGroup mutes
-……………
-muteuser[@username+id]
-Mute a user in SuperGroup
-+muteuser[@username+id]remove mutelist+
-……………
-mutelist
-SuperGroup muted user list
-……………
-banlist
-SuperGroup ban list
-……………
-clean[rules+about+modlist+mutelist]
-Cleaned
-……………
-del
-Deletes a massage by reply
-……………
-public[yes+no]
-Set SuperGroup visibility in pm chats or chatlist commands
-……………
-res[@username]
-Returns user name and id by @username
-……………
-log
-Returns SuperGroup logs
-……………
-addword[text]
-Added the badword
-+If the desired word is cleared+
-……………
-badwords
-SuperGroup badword list
-……………
-rw[text]
-clear[text]from list badword
-……………
-clearbadwords
-Cleaned badword list
-……………
-clantag[tag]
-Specifications clan a door clsh of clan
-……………
-music[truk name]
-Find songs to
-……………
-me
-Returns your specifications
-……………
-tophoto
-Become stickers to photos
-……………
-tosticker
-Turn photos into stikers
-……………
-rmsg [namber]
-Delete Massage in group
-……………
-conv[text]
-Text to photos
-……………
-sticker[text]
-Text-to-stickers
-……………
-wai
-To show office user
-……………
-voice[text]
-Text-to-voice
-……………
-
-برای دستورات فارسی از help استفاده کنید
-برای دریافت لیست سروسها از help2 استفاده کنید
+--- قفل کردن موارد بالا، یکی از موارد رو جلوی دستور بزارید.
+____________________
+باز کردن [یکی از موارد]
+--- باز کردن موارد ذکر شده بالا
+____________________
+حساسیت [4-30]
+--- حساسیت اسپم بین 4-30
+____________________
+تنظیم قوانین [قوانین]
+--- برای تنظیم قوانین
+____________________
+قوانین 
+--- نمایش قوانین
+____________________
+تنظیم درباره 
+--- تنظیم توضیحات پروفایل گروه
+____________________
+ایدی
+--- نمایش آیدی گروه
+____________________
+اخراجم کن 
+--- خروج از گروه
+____________________
+لیست مدیران 
+--- لیست مدیران
+____________________
+درمورد [ایدی | یوزرنیم]
+--- گرفتن اطلاعات صاحب آیدی
+____________________
+افراد
+--- لیست اعضای گروه
+____________________
+ربات ها
+--- لیست ربات های گروه
+____________________
+ادمین ها
+--- لیست ادمین های گروه
+____________________
+تنظیم ادمین 
+--- ادمین شدن
+____________________
+اطلاعات
+--- نشان دادن دقیق مشخصات خودتان و گروه
+____________________
+Our Channel : @TeleGold_Team
 ]],
   }
   serialize_to_file(config, './data/config.lua')
