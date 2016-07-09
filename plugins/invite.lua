@@ -1,6 +1,5 @@
 do
 local function callbackres(extra, success, result)
---vardump(result)
   local user = 'user#id'..result.peer_id
 	local chat = 'chat#id'..extra.chatid
 	local channel = 'channel#id'..extra.chatid
@@ -20,12 +19,12 @@ function run(msg, matches)
   if not is_momod(msg) then
 	return
   end
-  if not is_admin1(msg) then -- For admins only !
-		return 'Only admins can invite.'
+  if not is_admin1(msg) then
+		return 'فقط مدیران'
   end
   if not is_realm(msg) then
     if data[tostring(msg.to.id)]['settings']['lock_member'] == 'yes' and not is_admin1(msg) then
-		  return 'Group is private.'
+		  return 'گروه عمومی است.'
     end
   end
 	if msg.to.type ~= 'chat' or msg.to.type ~= 'channel' then 
@@ -36,7 +35,7 @@ function run(msg, matches)
 	end
 end
 return {
-    patterns = {"^[iI]nvite (.*)$"},
+    patterns = {"^(دعوت) (.*)$"},
     run = run
 }
 
