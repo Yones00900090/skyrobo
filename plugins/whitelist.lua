@@ -1,4 +1,5 @@
 do
+
 local function get_message_callback (extra , success, result)
 	if result.service then
 		local action = result.action.type
@@ -15,12 +16,14 @@ local function get_message_callback (extra , success, result)
 	local is_whitelisted = redis:sismember(hash, user_id)      
 	if is_whitelisted then
 		redis:srem(hash, user_id)
-		send_large_msg(receiver, "User/Bot ["..user_id.."] removed from whitelist")
+		send_large_msg(receiver, "کاربر/ربات ["..user_id.."] از لیست سفید حذف شد")
 	else
 		redis:sadd(hash, user_id)
-		send_large_msg(receiver, "کاربر ["..user_id.."] ادد شد در لیست سفید")
+		send_large_msg(receiver, "کاربر/ربات ["..user_id.."] به لیست سفید اضافه شد")
 	end
+	
 end
+
 local function whitelist_res (extra, success, result)
 	local user_id = result.peer_id
 	local receiver = extra.receiver
@@ -28,14 +31,15 @@ local function whitelist_res (extra, success, result)
 	local is_whitelisted = redis:sismember(hash, user_id)      
 	if is_whitelisted then
 		redis:srem(hash, user_id)
-		send_large_msg(receiver, "کاربر ["..user_id.."] از لیست سفید حذف شد")
+		send_large_msg(receiver, "کاربر/ربات ["..user_id.."] از لیست سفید حذف شد")
 	else
 		redis:sadd(hash, user_id)
-		send_large_msg(receiver, "کاربر ["..user_id.."] ادد شد در بیست سفید")
+		send_large_msg(receiver, "کاربر/ربات ["..user_id.."] به لیست سفید اضافه شد")
 	end
 end
+
 local function run (msg, matches)
-if matches[1] == "whitelist" and is_admin1(msg) then
+if matches[1] == "لیست سفید" and is_admin1(msg) then
     local hash = "whitelist"
     local user_id = ""
 	if type(msg.reply_id) ~= "nil" then
@@ -46,10 +50,10 @@ if matches[1] == "whitelist" and is_admin1(msg) then
 		local is_whitelisted = redis:sismember(hash, user_id)      
 		if is_whitelisted then
 			redis:srem(hash, user_id)
-			return "کاربر ["..user_id.."] از لیست سفید حذف شد"
+			return "کاربر/ربات ["..user_id.."] از لیست سفید حذف شد"
 		else
 			redis:sadd(hash, user_id)
-			return "کاربر ["..user_id.."] ادد شد در لیست سفید"
+			return "کاربر/ربات ["..user_id.."] به لیست سفید اضافه شد"
 		end
 	elseif not string.match(matches[2], '^%d+$') then
 		local receiver = get_receiver(msg)
@@ -58,14 +62,20 @@ if matches[1] == "whitelist" and is_admin1(msg) then
 		resolve_username(username, whitelist_res, {receiver = receiver})
 	end
 end
-	if matches[1] == "clean" and matches[2] == 'whitelist' and is_admin1(msg) then
+
+	if matches[1] == "پاکسازی" and matches[2] == 'لیست سفید' and is_admin1(msg) then
 		local hash =  'whitelist'
 			redis:del(hash)
-		return "لیست سفید حذف شد"
+		return "لیست سفید پاکسازی شد"
 	end
 end
+
 return {
-    patterns = {"^([wW]hitelist)$","^([wW]hitelist) (.*)$","^([cC]lean) (.*)$"},
+    patterns = {
+	  "^(لیست سفید)$",
+      "^(لیست سفید) (.*)$",
+	  "^(پاکسازی) (.*)$"
+    },
     run = run
 }
 end
