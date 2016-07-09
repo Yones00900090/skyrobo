@@ -1,8 +1,7 @@
-antiarabic = {}-- An empty table for solving multiple kicking problem
-
+antiarabic = {}
 do
 local function run(msg, matches)
-  if is_momod(msg) then -- Ignore mods,owner,admins
+  if is_momod(msg) then
     return
   end
   local data = load_data(_config.moderation.data)
@@ -19,9 +18,9 @@ local function run(msg, matches)
 		local username = msg.from.username
 		local name = msg.from.first_name
 		if username and is_super_group(msg) then
-			send_large_msg(receiver , "Arabic/Persian is not allowed here\n@"..username.."["..msg.from.id.."]\nStatus: User kicked/msg deleted")
+			send_large_msg(receiver , "عربی/فارسی اینجا ممنوع است\n@"..username.."["..msg.from.id.."]\nوضعیت: کاربر اخراج شد/پیام حذف شد")
 		else
-			send_large_msg(receiver , "Arabic/Persian is not allowed here\nName: "..name.."["..msg.from.id.."]\nStatus: User kicked/msg deleted")
+			send_large_msg(receiver , "عربی/فارسی اینجا ممنوع است\nName: "..name.."["..msg.from.id.."]\nوضعیت: کاربر اخراج شد/پیام حذف شد")
 		end
 		local name = user_print_name(msg.from)
 		savelog(msg.to.id, name.." ["..msg.from.id.."] kicked (arabic was locked) ")
@@ -35,13 +34,13 @@ local function run(msg, matches)
   return
 end
 local function cron()
-  antiarabic = {} -- Clear antiarabic table 
+  antiarabic = {}
 end
-
 return {
-  patterns = {"([\216-\219][\128-\191])"},
+  patterns = {
+    "([\216-\219][\128-\191])"
+    },
   run = run,
   cron = cron
 }
-
 end
