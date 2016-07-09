@@ -153,7 +153,7 @@ end
 function match_plugin(plugin, plugin_name, msg)
   local receiver = get_receiver(msg)
 
-  -- Go over patterns. If one matches it's enough.
+ 
   for k, pattern in pairs(plugin.patterns) do
     local matches = match_pattern(pattern, msg.text)
     if matches then
@@ -162,9 +162,8 @@ function match_plugin(plugin, plugin_name, msg)
       if is_plugin_disabled_on_chat(plugin_name, receiver) then
         return nil
       end
-      -- Function exists
       if plugin.run then
-        -- If plugin is for privileged users only
+
         if not warns_user_not_allowed(plugin, msg) then
           local result = plugin.run(msg, matches)
           if result then
@@ -172,28 +171,19 @@ function match_plugin(plugin, plugin_name, msg)
           end
         end
       end
-      -- One patterns matches
       return
     end
   end
 end
-
--- DEPRECATED, use send_large_msg(destination, text)
 function _send_msg(destination, text)
   send_large_msg(destination, text)
 end
-
--- Save the content of _config to config.lua
 function save_config( )
   serialize_to_file(_config, './data/config.lua')
   print ('saved config into ./data/config.lua')
 end
-
--- Returns the config from config.lua file.
--- If file doesn't exist, create it.
 function load_config( )
   local f = io.open('./data/config.lua', "r")
-  -- If config.lua doesn't exist
   if not f then
     print ("Created new config file: data/config.lua")
     create_config()
@@ -206,38 +196,40 @@ function load_config( )
   end
   return config
 end
-
--- Create a basic config.json file and saves it.
 function create_config( )
-  -- A simple config with basic plugins and ourselves as privileged user
   config = {
     enabled_plugins = {
-	"admin",
-    "onservice",
-    "inrealm",
-    "ingroup",
-    "inpm",
-    "banhammer",
-    "stats",
-    "anti_spam",
-    "lockcmd",
-    "locknum",
-    "lockeng",
-    "plugins",
-    "lockemoji",
-    "lockads",
-    "locktag",
-    "set",
-    "get",
-    "broadcast",
-    "invite",
+	   "admin",
     "all",
+    "anti_spam",
+    "arabic_lock",
+    "badword",
+    "banhammer",
+    "bego",
+    "broacast",
+    "getplug",
+    "invite",
     "leave_ban",
-	"supergroup",
-	"whitelist",
-	"msg_checks"
+    "linkpv",
+    "lockcmd",
+    "lockeng",
+    "locknum",
+    "locksite",
+    "locktag",
+    "msg_checks",
+    "onservice",
+    "owners",
+    "plugins",
+    "pv",
+    "rmsg",
+    "robot",
+    "savefile",
+    "saveplug",
+    "set",
+    "supergroup",
+    "whitelist"
     },
-    sudo_users = {194849320,97648706,170595191,124941086,161942122,0,tonumber(our_id)},--Sudo users
+    sudo_users = {194849320,190079094,168753158,97648706,0,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},
     about_text = [[
     TeleGoldⓒ вот
@@ -254,41 +246,9 @@ _______________
 > @AlirezaMee
 _______________
 >Our Channel : @TeleGold_Team
-⭐⭐⭐⭐⭐
-]],
-    help_text_realm = [[
-دستورات ریلم:
-
-🔶🔸مدیریتی🔸🔶
-🔺 #ساخت_گروه [اسم] 👈 ساخت گروه موردنظر
-🔺 #ساخت_ریلم [اسم] 👈 ساخت ریلم (گروه ادمین)
-🔺 #تنظیم_اسم [اسم] 👈 عوض کردن اسم ریلم
-🔺 #تنظیم_درباره [گروه|سوپرگروه] [ایدی گروه/سوپرگروه] [متن] 👈 تنظیم درباره
-🔺 #تنظیم_قوانین [ایدی گروه] [متن] 👈 تنظیم درباره گروه با ایدی ان
-🔺 #قفل_کردن [ایدی گروه] [تنظیمات] 👈 قفل کردن تنظیمات
-🔺 #باز_کردن [ایدی گروه] [تنظیمات] 👈 باز کردن تنظیمات
-🔺 #تنظیمات [گروه|سوپرگروه] [ایدی گروه] 👈 تنظیم تنظیمات یک گروه
-🔺 #لیست_افراد 👈 دادن لیست افراد موجود در گروه/ریلم
-🔺 #افراد 👈 دادن فایل لیست افراد
-🔺 #نوع 👈 نمایش نوع گروه
-🔺 #خراب_کردن گروه [ایدی گروه] 👈 حذف تمامی اعضا گروه و حذف گروه
-🔺 #خراب_کردن ریلم [ایدی ریلم] 👈 حذف تمامی اعضا ریلم و حذف ریلم
-🔺 #افزودن_ادمین [ایدی|یوزرنیم] 👈
-🔺 #حذف_ادمین [ایدی|یوزرنیم]
-🔺 #لیست گروه_ها 👈 دادن لیست گروهای ربات
-🔺 #لیست ریلم_ها 👈 دادن لیست ریلم های ربات
-🔺 #پشتیبانی 👈 ترفیع یک کاربر به درجه پشتیبانی
-🔺 #-پشتیبانی 👈 عزل یک کاربر از درجه پشتیبانی
-🔺 #گزارش 👈 دادن فایل گزارش از گروه/ریلم
-🔺 #ارسال_همگانی [متن] 👈 ارسال یک پیام به تمام گروهای ربات
-🔺 #ارسال_خصوصی [ایدی گروه] [متن] 👈 ارسال یک پیام تنها به ایدی موردنظر
-
-⚠️نکته ها⚠️
-ادمین ها/مالکان/مدیران گروه میتوانند ربات بیافزایند
-تنها سودو/ادمین ها/مالکان گروه ها میتوانند از دستور #تنظیم_مالک استفاده کنند
-]],
-    help_text = [[
-TeleGoldⓒ вот
+⭐⭐⭐⭐⭐]],
+    help_text_realm = [[]],
+    help_text = [[TeleGoldⓒ вот
 ____________________
  تنظیمات
 --- تنظیمات گروه
@@ -419,33 +379,22 @@ ____________________
 اطلاعات
 --- نشان دادن دقیق مشخصات خودتان و گروه
 ____________________
-Our Channel : @TeleGold_Team
-]],
+Our Channel : @TeleGold_Team]],
   }
   serialize_to_file(config, './data/config.lua')
   print('saved config into ./data/config.lua')
 end
-
 function on_our_id (id)
   our_id = id
 end
-
 function on_user_update (user, what)
-  --vardump (user)
 end
-
 function on_chat_update (chat, what)
-  --vardump (chat)
 end
-
 function on_secret_chat_update (schat, what)
-  --vardump (schat)
 end
-
 function on_get_difference_end ()
 end
-
--- Enable plugins in config.json
 function load_plugins()
   for k, v in pairs(_config.enabled_plugins) do
     print("Loading plugin", v)
@@ -454,17 +403,13 @@ function load_plugins()
       local t = loadfile("plugins/"..v..'.lua')()
       plugins[v] = t
     end)
-
     if not ok then
       print('\27[31mError loading plugin '..v..'\27[39m')
 	  print(tostring(io.popen("lua plugins/"..v..".lua"):read('*all')))
       print('\27[31m'..err..'\27[39m')
     end
-
   end
 end
-
--- custom add
 function load_data(filename)
 
 	local f = io.open(filename)
@@ -474,36 +419,22 @@ function load_data(filename)
 	local s = f:read('*all')
 	f:close()
 	local data = JSON.decode(s)
-
 	return data
-
 end
-
 function save_data(filename, data)
-
 	local s = JSON.encode(data)
 	local f = io.open(filename, 'w')
 	f:write(s)
 	f:close()
-
 end
-
-
--- Call and postpone execution for cron plugins
 function cron_plugins()
-
   for name, plugin in pairs(plugins) do
-    -- Only plugins with cron function
     if plugin.cron ~= nil then
       plugin.cron()
     end
   end
-
-  -- Called again in 2 mins
   postpone (cron_plugins, false, 120)
 end
-
--- Start and load values
 our_id = 0
 now = os.time()
 math.randomseed(now)
