@@ -38,5 +38,4 @@ return {
     patterns = {"^(دعوت) (.*)$"},
     run = run
 }
-
 end
