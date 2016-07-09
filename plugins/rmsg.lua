@@ -19,7 +19,7 @@ local function run(msg, matches)
       return "فقط در سوپرگروه ممکن است"
     end
   else
-    return "دست نزن"
+    return "با ربات بازیت گرفته :|"
   end
 end
 return {
