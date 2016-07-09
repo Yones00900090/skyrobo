@@ -1,6 +1,4 @@
 do
-
--- Returns the key (index) in the config.enabled_plugins table
 local function plugin_enabled( name )
   for k,v in pairs(_config.enabled_plugins) do
     if name == v then
@@ -10,8 +8,6 @@ local function plugin_enabled( name )
   -- If not found
   return false
 end
-
--- Returns true if file exists in plugins folder
 local function plugin_exists( name )
   for k,v in pairs(plugins_names()) do
     if name..'.lua' == v then
@@ -20,7 +16,6 @@ local function plugin_exists( name )
   end
   return false
 end
-
 local function list_all_plugins(only_enabled)
   local text = ''
   local nsum = 0
@@ -42,7 +37,7 @@ local function list_all_plugins(only_enabled)
       text = text..nsum..'> '..status..' '..v..'\n'
     end
   end
-  local text = text..'\n______________________________\nNumber of all tools: '..nsum..'\nEnable tools= '..nact..' and Disables= '..nsum-nact
+  local text = text..'\n……………………………………………………\nتعداد پلاگین ها: '..nsum..'\nپلاگین های فعال: '..nact..' پلاگین های غیر فعال: '..nsum-nact
   return text
 end
 
@@ -67,7 +62,7 @@ local function list_plugins(only_enabled)
       text = text..status..' '..v..'\n'
     end
   end
-  local text = text..'\n___________________________\nAll tools= '..nsum..' ,Enable items= '..nact
+  local text = text..'\n……………………………………………………\nهمه پلاگین ها: '..nsum..' پلاگین های فعال: '..nact
   return text
 end
 
@@ -82,7 +77,7 @@ local function enable_plugin( plugin_name )
   print('checking if '..plugin_name..' exists')
   -- Check if plugin is enabled
   if plugin_enabled(plugin_name) then
-    return plugin_name..' is enabled'
+    return plugin_name..' فعال است.'
   end
   -- Checks if plugin exists
   if plugin_exists(plugin_name) then
@@ -93,7 +88,7 @@ local function enable_plugin( plugin_name )
     -- Reload the plugins
     return reload_plugins( )
   else
-    return plugin_name..' does not exists'
+    return plugin_name..' وجود ندارد.'
   end
 end
 
@@ -129,7 +124,7 @@ local function disable_plugin_on_chat(receiver, plugin)
   _config.disabled_plugin_on_chat[receiver][plugin] = true
 
   save_config()
-  return plugin..' disabled in group'
+  return plugin..' غیر فعال شده بود'
 end
 
 local function reenable_plugin_on_chat(receiver, plugin)
@@ -215,8 +210,7 @@ return {
     "^!plugins? (-) ([%w_%.%-]+) (gp)",
     "^!plugins? (@)$" },
   run = run,
-  moderated = true, -- set to moderator mode
-  --privileged = true
+  moderated = true,
 }
 
 end
