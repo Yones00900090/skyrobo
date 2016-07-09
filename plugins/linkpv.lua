@@ -16,5 +16,4 @@ return {
   patterns = {"^لینک پی وی$"},
   run = run
 }
-
 end
