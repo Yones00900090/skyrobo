@@ -1,17 +1,3 @@
---[[با سلام خدمت ادیتور های گرامی
-با توجه به اینکه دستور banallوunban وunbanall با ریپلی در سوپر گروه ها جواب نمیداد
-تصمیم بر ان گرفتم که فیکس کنم
-نکته ای که باید حتما رعایت کنید اینکه 
-اول به پوشه بوت رفته و utils رو باز کنید
-2 فانیکش را زیر را پیدا کنید
-1)function unban_by_reply(extra, success, result)
-2)function banall_by_reply(extra, success, result)
-کل این قسمت هارو پاکنید و تمام {کل فانیکش}
-
-من @VALTMAN فقط برای رفاه دوستان اینو اوپن کردم
-لطفا پخش کنید به دست همه برسه  
-سپاس
-]]
 local function pre_process(msg)
   local data = load_data(_config.moderation.data)
   -- SERVICE MESSAGE
