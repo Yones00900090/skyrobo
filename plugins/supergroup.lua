@@ -903,7 +903,6 @@ function get_message_callback(extra, success, result)
 		if result.to.peer_type == 'channel' then
 		savelog(msg.to.id, name_log.." ["..msg.from.id.."] promoted mod: @"..member_username.."["..result.from.peer_id.."] by reply")
 		promote2("channel#id"..result.to.peer_id, member_username, member_id)
-	    --channel_set_mod(channel_id, user, ok_cb, false)
 		end
 	elseif get_cmd == "demote" then
 		local full_name = (result.from.first_name or '')..' '..(result.from.last_name or '')
@@ -946,23 +945,11 @@ function get_message_callback(extra, success, result)
 		end
 	end
 end
--- End by reply actions
-
---By ID actions
 local function cb_user_info(extra, success, result)
 	local receiver = extra.receiver
 	local user_id = result.peer_id
 	local get_cmd = extra.get_cmd
 	local data = load_data(_config.moderation.data)
-	--[[if get_cmd == "setadmin" then
-		local user_id = "user#id"..result.peer_id
-		channel_set_admin(receiver, user_id, ok_cb, false)
-		if result.username then
-			text = "@"..result.username.." ادمین شد"
-		else
-			text = "[ "..result.peer_id.." ] ادمین شد"
-		end
-			send_large_msg(receiver, text)]]
 	if get_cmd == "demoteadmin" then
 		if is_admin2(result.peer_id) then
 			return send_large_msg(receiver, "شما نمیتوانید ادمین گلوبال را عزل کنید")
@@ -992,8 +979,6 @@ local function cb_user_info(extra, success, result)
 		demote2(receiver, member_username, user_id)
 	end
 end
-
--- Begin resolve username actions
 local function callbackres(extra, success, result)
   local member_id = result.peer_id
   local member_username = "@"..result.username
@@ -1017,9 +1002,7 @@ local function callbackres(extra, success, result)
 	elseif get_cmd == "promote" then
 		local receiver = extra.channel
 		local user_id = result.peer_id
-		--local user = "user#id"..result.peer_id
 		promote2(receiver, member_username, user_id)
-		--channel_set_mod(receiver, user, ok_cb, false)
 	elseif get_cmd == "demote" then
 		local receiver = extra.channel
 		local user_id = result.peer_id
@@ -1842,8 +1825,8 @@ local function run(msg, matches)
 			if not is_momod(msg) then
 				return
 			end
-			if tonumber(matches[2]) < 4 or tonumber(matches[2]) > 30 then
-				return "حساسیت اسپم باید بین 4-30 باشد."
+			if tonumber(matches[2]) < 5 or tonumber(matches[2]) > 20 then
+				return "حساسیت اسپم باید بین 5-20 باشد."
 			end
 			local flood_max = matches[2]
 			data[tostring(msg.to.id)]['settings']['flood_msg_max'] = flood_max
@@ -2152,8 +2135,8 @@ ____________________
 باز کردن [یکی از موارد]
 --- باز کردن موارد ذکر شده بالا
 ____________________
-حساسیت [4-30]
---- حساسیت اسپم بین 4-30
+حساسیت [5-20]
+--- حساسیت اسپم بین 5-20
 ____________________
 تنظیم قوانین [قوانین]
 --- برای تنظیم قوانین
@@ -2191,27 +2174,23 @@ ____________________
 اطلاعات
 --- نشان دادن دقیق مشخصات خودتان و گروه
 ____________________
-Our Channerl : @TeleGold_Team]]
+Our Channel : @TeleGold_Team]]
 			reply_msg(msg.id, text, ok_cb, false)
 		elseif matches[1] == 'راهنما' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] Used /superhelp")
 			return super_help()
 		end
-
 		if matches[1] == 'peer_id' and is_admin1(msg)then
 			text = msg.to.peer_id
 			reply_msg(msg.id, text, ok_cb, false)
 			post_large_msg(receiver, text)
 		end
-
 		if matches[1] == 'msg.to.id' and is_admin1(msg) then
 			text = msg.to.id
 			reply_msg(msg.id, text, ok_cb, false)
 			post_large_msg(receiver, text)
 		end
-
-		--Admin Join Service Message
 		if msg.service then
 		local action = msg.action.type
 			if action == 'chat_add_user_link' then
@@ -2324,5 +2303,3 @@ return {
   run = run,
   pre_process = pre_process
 }
---End supergrpup.lua
---By @Rondoozle
