@@ -26,7 +26,7 @@ end
 return {
   patterns = {
 "^([Ss]ave) (.*)$",
-"^(سیو) (.*)$"
+"^(save) (.*)$"
 },
   run = run,
 }
