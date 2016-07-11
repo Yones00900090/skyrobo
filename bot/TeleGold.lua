@@ -7,8 +7,6 @@ require("./bot/utils")
 local f = assert(io.popen('/usr/bin/git describe --tags', 'r'))
 VERSION = assert(f:read('*a'))
 f:close()
-
--- This function is called when tg receive a msg
 function on_msg_receive (msg)
   if not started then
     return
@@ -206,7 +204,7 @@ function create_config( )
     "badword",
     "banhammer",
     "bego",
-    "broacast",
+    "broadcast",
     "getplug",
     "invite",
     "leave_ban",
@@ -378,6 +376,9 @@ ____________________
 ____________________
 اطلاعات
 --- نشان دادن دقیق مشخصات خودتان و گروه
+____________________
+راهنما سرویس
+*راهنما لیست سوریس های ربات*
 ____________________
 Our Channel : @TeleGold_Team]],
   }
